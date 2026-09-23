@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Asal.OrderManagementSystem.Tests/Asal.OrderManagementSystem.Tests.csproj" />
+  <Project Path="Asal.OrderManagementSystem/Asal.OrderManagementSystem.csproj" />
+</Solution>
