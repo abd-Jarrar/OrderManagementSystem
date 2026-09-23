@@ -7,11 +7,10 @@ namespace Asal.OrderManagementSystem.Interfaces
 {
     public interface IProductRepository
     {
-        Guid? GetProductById();
+        Product? GetProductById(Guid productId);
         List<Product> GetAll();
 
         Guid? AddProduct(string name,decimal price,int stockQuantity);
 
-        bool AddProductToOrder(Guid orderId, Guid productId);
     }
 }

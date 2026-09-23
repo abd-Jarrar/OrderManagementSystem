@@ -17,7 +17,10 @@ namespace Asal.OrderManagementSystem.Interfaces
 
         public void CancelOrder(Guid orderId);
 
-        public decimal CalculateOrderTotalPrice(Guid orderId);
+        public decimal? CalculateOrderTotalPrice(Guid orderId);
+
+
+        public bool AddProductToOrder(Guid orderId, Guid productId, int quantity);
 
     }
 }
