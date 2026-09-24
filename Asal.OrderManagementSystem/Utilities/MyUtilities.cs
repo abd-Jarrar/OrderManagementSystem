@@ -77,6 +77,14 @@ namespace Asal.OrderManagementSystem.Utilities
             Console.WriteLine("========================================");
         }
 
+        public static void PrintOrders(List<Order> orders)
+        {
+            foreach (var order in orders)
+            {
+                PrintOrder(order);
+            }
+        }
+
         public static void PrintProduct(Product product)
         {
             Console.WriteLine($"Product ID       : {product.Id}");
@@ -91,6 +99,59 @@ namespace Asal.OrderManagementSystem.Utilities
             foreach (var product in products)
             {
                 PrintProduct(product);
+            }
+        }
+
+        public static OrderStatus ReadOrderStatus()
+        {
+            while (true)
+            {
+                Console.WriteLine("Select Order Status:");
+                Console.WriteLine("0. Pending");
+                Console.WriteLine("1. Shipped");
+                Console.WriteLine("2. Completed");
+                Console.WriteLine("3. Cancelled");
+
+                Console.Write("Enter status: ");
+
+                string? input = Console.ReadLine();
+
+                if (int.TryParse(input, out int status) &&
+                    Enum.IsDefined(typeof(OrderStatus), status))
+                {
+                    return (OrderStatus)status;
+                }
+
+                Console.WriteLine("Invalid status. Please choose 0, 1, 2, or 3.");
+                Console.WriteLine();
+            }
+        }
+
+        public static int ReadNonNegativeInt(string message)
+        {
+            while (true)
+            {
+                Console.Write(message);
+                string? input = Console.ReadLine();
+
+                if (int.TryParse(input, out int value) && value >= 0)
+                    return value;
+
+                Console.WriteLine("Invalid number. Please enter 0 or a positive number.");
+            }
+        }
+
+        public static int ReadPositiveInt(string message)
+        {
+            while (true)
+            {
+                Console.Write(message);
+                string? input = Console.ReadLine();
+
+                if (int.TryParse(input, out int value) && value > 0)
+                    return value;
+
+                Console.WriteLine("Invalid number. Please enter a positive number.");
             }
         }
     }

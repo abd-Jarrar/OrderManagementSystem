@@ -58,7 +58,7 @@ namespace Asal.OrderManagementSystem.Repositories
 
         public List<Product> GetAll()
         {
-            return _products;
+            return _products.ToList();
         }
 
         public Product? GetProductById(Guid productId)

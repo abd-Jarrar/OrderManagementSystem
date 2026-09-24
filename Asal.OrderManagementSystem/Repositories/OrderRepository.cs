@@ -82,6 +82,12 @@ namespace Asal.OrderManagementSystem.Repositories
             if (order is null)
                 return false;
 
+            if (order.Status == OrderStatus.Completed ||
+                order.Status == OrderStatus.Cancelled)
+            {
+                return false;
+            }
+
             var product = _productRepository.GetProductById(productId);
 
             if (product is null)
