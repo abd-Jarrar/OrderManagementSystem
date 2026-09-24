@@ -163,6 +163,25 @@ namespace Asal.OrderManagementSystem.Repositories
             if (items is null || items.Count == 0)
                 return null;
 
+            
+            foreach (var item in items)
+            {
+                var product = _productRepository.GetProductById(item.ProductId);
+
+                if (product is null)
+                    return null;
+
+                if (item.Quantity <= 0)
+                    return null;
+
+                if (product.Price < 0)
+                    return null;
+
+                if (item.Quantity > product.StockQuantity)
+                    return null;
+            }
+
+            
             var order = new Order
             {
                 Id = Guid.NewGuid(),
@@ -171,6 +190,14 @@ namespace Asal.OrderManagementSystem.Repositories
                 CreatedDate = DateTime.Now,
                 OrderItems = items
             };
+
+            
+            foreach (var item in items)
+            {
+                var product = _productRepository.GetProductById(item.ProductId);
+
+                product!.StockQuantity -= item.Quantity;
+            }
 
             _orders.Add(order);
 
