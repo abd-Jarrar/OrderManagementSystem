@@ -19,20 +19,27 @@ namespace Asal.OrderManagementSystem.Services
 
         public void AddCustomer()
         {
-            string customerName = MyUtilities.Read("Enter customer name: ");
-            string customerEmail = MyUtilities.Read("Enter customer email: ");
-
-            Guid? customerId = _customerRepository.AddCustomer(
-                customerName,
-                customerEmail
-            );
-
-            if (customerId is null)
+            try
             {
-                throw new InvalidOperationException("Failed to add customer.");
-            }
+                string customerName = MyUtilities.Read("Enter customer name: ");
+                string customerEmail = MyUtilities.Read("Enter customer email: ");
 
-            Console.WriteLine($"Customer added successfully. Id: {customerId}");
+                Guid? customerId = _customerRepository.AddCustomer(
+                    customerName,
+                    customerEmail
+                );
+
+                if (customerId is null)
+                {
+                    throw new InvalidOperationException("Failed to add customer.");
+                }
+
+                Console.WriteLine($"Customer added successfully. Id: {customerId}");
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
         }
 
         public void PrintAllCustomers()
